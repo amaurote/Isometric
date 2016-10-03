@@ -8,13 +8,14 @@ import isometric.Core;
  */
 public class Brick {
 
-    private int height;
+    private float height;
     private boolean direction;
     private float fade;
     
     private final int FADE_LIMIT = 40;
     private final int FADE_CORASE = 11;
-
+    
+    @Deprecated
     public Brick(int height, boolean direction) {
         this.height = height;
         this.direction = direction;
@@ -22,7 +23,7 @@ public class Brick {
         this.fade = 0;
     }
 
-    public int move() {
+    public float move() {
         if (fade > 0) {
             fade = fade - 0.5f;
             return height;
@@ -51,7 +52,7 @@ public class Brick {
         return height;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 }

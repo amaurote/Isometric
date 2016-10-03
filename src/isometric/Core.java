@@ -28,7 +28,7 @@ public class Core implements Runnable {
     public static final int TILE_WIDTH = 40;
     public static final int TILE_HEIGHT = TILE_WIDTH / 2;
 
-    public static final int TILE_COUNT = 20;
+    public static final int TILE_COUNT = 10;
 
     public static final int TILE_MAX_ELEVATION = 1000;
 
