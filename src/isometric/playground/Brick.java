@@ -10,18 +10,18 @@ public class Brick {
 
     private int height;
     private boolean direction;
-    private float pause;
+    private float fade;
 
     public Brick(int height, boolean direction) {
         this.height = height;
         this.direction = direction;
 
-        this.pause = 0;
+        this.fade = 0;
     }
 
     public int move() {
-        if (pause > 0) {
-            pause--;
+        if (fade > 0) {
+            fade--;
             return height;
         }
 
@@ -38,11 +38,11 @@ public class Brick {
         }
 
         if (height < 40) {
-            pause = (40 - height) / 6;
+            fade = (40 - height) / 7;
         }
 
         if (Core.TILE_MAX_ELEVATION - height < 40) {
-            pause = (40 - (Core.TILE_MAX_ELEVATION - height)) / 6;
+            fade = (40 - (Core.TILE_MAX_ELEVATION - height)) / 7;
         }
 
         return height;
