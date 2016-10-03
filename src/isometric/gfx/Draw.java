@@ -34,7 +34,7 @@ public class Draw {
     public static void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        // coordinates translate: horizontaly to center; vertical offset;
+        // coordinates translate: horizontal: to center; vertical: offset;
         g2.translate(Core.FRAME_WIDTH / 2, Core.VERTICAL_OFFSET);
 
         // draw
@@ -50,8 +50,9 @@ public class Draw {
         int xOffset = (x - y) * tileWidth / 2;
         int yOffset = (x + y) * tileHeight / 2;
         g2.translate(xOffset, yOffset);
-
-        z = z / 100;
+        
+        // corase
+        z = z / 100.0f;
 
         // set colors
         Color c_top = new Color(238, 238, 238);
@@ -107,7 +108,7 @@ public class Draw {
             g2.draw(p_right);
         }
 
-        // re-set translation
+        // re-set translation (VERY IMPORTANT)
         g2.translate(-xOffset, -yOffset);
     }
 
@@ -137,7 +138,7 @@ public class Draw {
             g2.draw(path);
         }
 
-        // re-set translation
+        // re-set translation (VERY IMPORTANT)
         g2.translate(-xOffset, -yOffset);
     }
 }
