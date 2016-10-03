@@ -16,8 +16,7 @@ public class Draw {
     private static int tileWidth = Core.TILE_WIDTH;
     private static int tileHeight = Core.TILE_HEIGHT;
 
-    private static boolean fill = true;
-    private static boolean outline = true;
+    private static final boolean OUTLINE = false;
 
     public static void init() {
     
@@ -101,7 +100,7 @@ public class Draw {
         }
 
         // draw outline
-        if (outline) {
+        if (OUTLINE) {
             g2.setPaint(c_outline);
             g2.draw(p_top);
             g2.draw(p_left);
@@ -133,7 +132,7 @@ public class Draw {
         g2.fill(path);
 
         // draw outline
-        if (outline) {
+        if (OUTLINE) {
             g2.setPaint(Color.black);
             g2.draw(path);
         }

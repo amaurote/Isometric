@@ -27,19 +27,21 @@ public class Playground {
     }
 
     private static void generate() {
-        /*
+
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
                 bricks[x][y] = new Brick(Core.rand.nextInt(Core.TILE_MAX_ELEVATION),
                         Core.rand.nextBoolean());
             }
-        }*/
+        }
 
+        /*
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
                 bricks[x][y] = new Brick((x + y) * 20, true);
             }
         }
+         */
     }
 
     private static void keyInput() {
