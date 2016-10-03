@@ -11,6 +11,9 @@ public class Brick {
     private int height;
     private boolean direction;
     private float fade;
+    
+    private final int FADE_LIMIT = 40;
+    private final int FADE_CORASE = 11;
 
     public Brick(int height, boolean direction) {
         this.height = height;
@@ -21,7 +24,7 @@ public class Brick {
 
     public int move() {
         if (fade > 0) {
-            fade--;
+            fade = fade - 0.5f;
             return height;
         }
 
@@ -37,12 +40,12 @@ public class Brick {
             }
         }
 
-        if (height < 40) {
-            fade = (40 - height) / 7;
+        if (height < FADE_LIMIT) {
+            fade = (FADE_LIMIT - height) / FADE_CORASE;
         }
 
-        if (Core.TILE_MAX_ELEVATION - height < 40) {
-            fade = (40 - (Core.TILE_MAX_ELEVATION - height)) / 7;
+        if (Core.TILE_MAX_ELEVATION - height < FADE_LIMIT) {
+            fade = (FADE_LIMIT - (Core.TILE_MAX_ELEVATION - height)) / FADE_CORASE;
         }
 
         return height;
