@@ -93,7 +93,7 @@ public class Core implements Runnable {
     public void run() {
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
-        final double ns = 1000000000.0 / 30.0; // fps
+        final double ns = 1000000000.0 / 60.0; // fps
         double delta = 0;
         int frames = 0;
         int updates = 0;
@@ -103,7 +103,7 @@ public class Core implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             if (delta >= 1.0) {
-                delta = 0;
+                delta--;
                 update();
                 updates++;
 
