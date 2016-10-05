@@ -30,12 +30,12 @@ public class Brick {
         }
 
         if (direction) {
-            height += 2;
+            height += 0.5f;
             if (height >= Core.TILE_MAX_ELEVATION) {
                 direction = false;
             }
         } else {
-            height -= 2;
+            height -= 0.5f;
             if (height <= 0) {
                 direction = true;
             }

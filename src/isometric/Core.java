@@ -94,7 +94,7 @@ public class Core implements Runnable {
         long lastTime = System.nanoTime();
         long now;
         long timer = System.currentTimeMillis();
-        final double ns = 1000000000.0 / 60.0; // fps
+        final double ns = 1000000000.0 / 120.0; // fps
         double delta = 0;
         int frames = 0;
         int updates = 0;
@@ -120,14 +120,13 @@ public class Core implements Runnable {
 
                 onTime();
             }
-            /*
+            
             // sleep
             try {
-                Thread.sleep(1);
+                Thread.sleep(0, 999);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-             */
         }
 
         stop();

@@ -15,24 +15,26 @@ public class Draw {
 
     private static int tileWidth = Core.TILE_WIDTH;
     private static int tileHeight = Core.TILE_HEIGHT;
-
+    
     private static final boolean OUTLINE = true;
 
     public static void init() {
-    
+
     }
 
     public static void update() {
         // move
-        for (int x = 0; x < Core.TILE_COUNT; x++) {
-            for (int y = 0; y < Core.TILE_COUNT; y++) {
-                Playground.getBrick(x, y).move();
+        for (int a = 3; a >= 0; a--) {
+            for (int x = 0; x < Core.TILE_COUNT; x++) {
+                for (int y = 0; y < Core.TILE_COUNT; y++) {
+                    Playground.getBrick(x, y).move();
+                }
             }
         }
     }
 
     public static void onTime() {
-        
+
     }
 
     public static void draw(Graphics g) {
@@ -54,7 +56,7 @@ public class Draw {
         int xOffset = (x - y) * tileWidth / 2;
         int yOffset = (x + y) * tileHeight / 2;
         g2.translate(xOffset, yOffset);
-        
+
         // corase
         z = z / 100.0f;
 
@@ -105,7 +107,7 @@ public class Draw {
         }
 
         // draw outline
-        if (OUTLINE) {
+        else {
             g2.setPaint(c_outline);
             g2.draw(p_top);
             g2.draw(p_left);
