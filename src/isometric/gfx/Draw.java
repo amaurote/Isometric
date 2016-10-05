@@ -16,14 +16,19 @@ public class Draw {
     private static int tileWidth = Core.TILE_WIDTH;
     private static int tileHeight = Core.TILE_HEIGHT;
 
-    private static final boolean OUTLINE = false;
+    private static final boolean OUTLINE = true;
 
     public static void init() {
     
     }
 
     public static void update() {
-
+        // move
+        for (int x = 0; x < Core.TILE_COUNT; x++) {
+            for (int y = 0; y < Core.TILE_COUNT; y++) {
+                Playground.getBrick(x, y).move();
+            }
+        }
     }
 
     public static void onTime() {
@@ -39,7 +44,7 @@ public class Draw {
         // draw
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
-                drawBlock(g2, x, y, Playground.getBrick(x, y).move());
+                drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());
             }
         }
     }

@@ -38,10 +38,10 @@ public class Playground {
         /*
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
-                bricks[x][y] = new Brick((x + y) * 20, true);
+                bricks[x][y] = new Brick((x + y) * 10 + 20, true);
             }
         }
-         */
+        */
     }
 
     private static void keyInput() {

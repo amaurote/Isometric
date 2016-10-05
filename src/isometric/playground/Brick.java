@@ -11,10 +11,10 @@ public class Brick {
     private float height;
     private boolean direction;
     private float fade;
-    
+
     private final int FADE_LIMIT = 40;
     private final int FADE_CORASE = 11;
-    
+
     @Deprecated
     public Brick(int height, boolean direction) {
         this.height = height;
@@ -30,12 +30,12 @@ public class Brick {
         }
 
         if (direction) {
-            height++;
+            height += 2;
             if (height >= Core.TILE_MAX_ELEVATION) {
                 direction = false;
             }
         } else {
-            height--;
+            height -= 2;
             if (height <= 0) {
                 direction = true;
             }

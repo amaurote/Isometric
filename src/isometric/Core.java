@@ -92,6 +92,7 @@ public class Core implements Runnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime();
+        long now;
         long timer = System.currentTimeMillis();
         final double ns = 1000000000.0 / 60.0; // fps
         double delta = 0;
@@ -99,21 +100,19 @@ public class Core implements Runnable {
         int updates = 0;
 
         while (running) {
-            long now = System.nanoTime();
+            now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
             if (delta >= 1.0) {
-                delta--;
                 update();
                 updates++;
-
+                delta--;
             }
-
             render();
             frames++;
 
             // timer 1000ms
-            if (System.currentTimeMillis() - timer > 1000) {
+            if (System.currentTimeMillis() - timer >= 1000) {
                 timer = System.currentTimeMillis();
                 display.getFrame().setTitle(FRAME_TITLE + "  |  " + updates + " ups, " + frames + " fps");
                 updates = 0;
@@ -121,13 +120,14 @@ public class Core implements Runnable {
 
                 onTime();
             }
-
+            /*
             // sleep
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+             */
         }
 
         stop();
