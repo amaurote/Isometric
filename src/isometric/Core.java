@@ -136,7 +136,7 @@ public class Core implements Runnable {
     // TIME
     private void update() {
         keyManager.update();
-
+        
         Playground.update();
         Draw.update();
     }
