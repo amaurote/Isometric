@@ -20,13 +20,15 @@ public class Core implements Runnable {
     // frame
     public final String FRAME_TITLE = "Isometric";
     public static final int FRAME_WIDTH = 800;
-    public static final int FRAME_HEIGHT = 600;
-
-    public static final int VERTICAL_OFFSET = 200;
+    public static final int FRAME_HEIGHT = 420;
+    
+    // draw
+    public static final int VERTICAL_DRAW_OFFSET = 20;
 
     // tiles
     public static final int TILE_WIDTH = 40;
     public static final int TILE_HEIGHT = TILE_WIDTH / 2;
+    public static final int TILE_ELEV = TILE_WIDTH * 2 + TILE_HEIGHT;
 
     public static final int TILE_COUNT = 20;
 

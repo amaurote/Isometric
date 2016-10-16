@@ -11,6 +11,7 @@ public class Playground {
     private static Brick[][] bricks;
     private static Player player;
 
+    private static final int MAX_KEY_DELAY = 15;
     private static int keyDelay;
 
     public static void init() {
@@ -27,57 +28,81 @@ public class Playground {
     }
 
     private static void generate() {
-
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
-                bricks[x][y] = new Brick(Core.rand.nextInt(Core.TILE_MAX_ELEVATION),
-                        Core.rand.nextBoolean());
+                bricks[x][y] = new Brick(1, 1);
             }
         }
-
-        /*
-        for (int x = 0; x < Core.TILE_COUNT; x++) {
-            for (int y = 0; y < Core.TILE_COUNT; y++) {
-                bricks[x][y] = new Brick((x + y) * 10 + 20, true);
-            }
-        }
-        */
     }
 
     private static void keyInput() {
         if (keyDelay <= 0) {
 
-            // left
-            if (Core.getKeyManager().left) {
+            // up left
+            if (Core.getKeyManager().upleft) {
                 if (player.getX() > 0) {
-                    if (bricks[player.getX()][player.getY()].getHeight()
-                            >= bricks[player.getX() - 1][player.getY()].getHeight()) {
-                        player.moveX();
-                        keyDelay = 15;
-                    }
+                    player.moveX(0);
+                    keyDelay = MAX_KEY_DELAY;
                 }
             }
 
-            // right
-            if (Core.getKeyManager().right) {
+            // up right
+            if (Core.getKeyManager().upright) {
                 if (player.getY() > 0) {
-                    if (bricks[player.getX()][player.getY()].getHeight()
-                            >= bricks[player.getX()][player.getY() - 1].getHeight()) {
-                        player.moveY();
-                        keyDelay = 15;
-                    }
+                    player.moveY(0);
+                    keyDelay = MAX_KEY_DELAY;
+                }
+            }
+
+            // down left
+            if (Core.getKeyManager().downleft) {
+                if (player.getX() + 1 < Core.TILE_COUNT) {
+                    player.moveY(1);
+                    keyDelay = MAX_KEY_DELAY;
+                }
+            }
+
+            // down right
+            if (Core.getKeyManager().downright) {
+                if (player.getY() + 1 < Core.TILE_COUNT) {
+                    player.moveX(1);
+                    keyDelay = MAX_KEY_DELAY;
                 }
             }
 
             // up
             if (Core.getKeyManager().up) {
                 if (player.getX() > 0 && player.getY() > 0) {
-                    if (bricks[player.getX()][player.getY()].getHeight()
-                            >= bricks[player.getX() - 1][player.getY() - 1].getHeight()) {
-                        player.moveX();
-                        player.moveY();
-                        keyDelay = 15;
-                    }
+                    player.moveX(0);
+                    player.moveY(0);
+                    keyDelay = MAX_KEY_DELAY;
+                }
+            }
+
+            // down
+            if (Core.getKeyManager().down) {
+                if (player.getX() + 1 < Core.TILE_COUNT && player.getY() + 1 < Core.TILE_COUNT) {
+                    player.moveX(1);
+                    player.moveY(1);
+                    keyDelay = MAX_KEY_DELAY;
+                }
+            }
+
+            // left
+            if (Core.getKeyManager().left) {
+                if (player.getX() > 0 && player.getY() + 1 < Core.TILE_COUNT) {
+                    player.moveX(0);
+                    player.moveY(1);
+                    keyDelay = MAX_KEY_DELAY;
+                }
+            }
+
+            // right
+            if (Core.getKeyManager().right) {
+                if (player.getY() > 0 && player.getX() + 1 < Core.TILE_COUNT) {
+                    player.moveY(0);
+                    player.moveX(1);
+                    keyDelay = MAX_KEY_DELAY;
                 }
             }
 

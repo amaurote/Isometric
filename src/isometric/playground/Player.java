@@ -1,5 +1,7 @@
 package isometric.playground;
 
+import isometric.Core;
+
 /**
  *
  * @author AMAUROTE
@@ -14,15 +16,27 @@ public class Player {
         this.y = y;
     }
 
-    public void moveX() {
-        if (x > 0) {
-            x--;
+    public void moveX(int dir) {
+        if (dir == 1) {
+            if (x < Core.TILE_COUNT) {
+                x++;
+            }
+        } else {
+            if (x > 0) {
+                x--;
+            }
         }
     }
 
-    public void moveY() {
-        if (y > 0) {
-            y--;
+    public void moveY(int dir) {
+        if (dir == 1) {
+            if (y < Core.TILE_COUNT) {
+                y++;
+            }
+        } else {
+            if (y > 0) {
+                y--;
+            }
         }
     }
 

@@ -10,10 +10,17 @@ public class Brick {
 
     private float height;
     private boolean direction;
-    private float fade;
+    
+    private int type;
 
+    private float fade;
     private final int FADE_LIMIT = 40;
     private final int FADE_CORASE = 11;
+
+    public Brick(int level, int type) {
+        height = level * Core.TILE_ELEV;
+        this.type = type;
+    }
 
     @Deprecated
     public Brick(int height, boolean direction) {
