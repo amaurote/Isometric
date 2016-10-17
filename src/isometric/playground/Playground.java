@@ -36,8 +36,20 @@ public class Playground {
     }
 
     private static void keyInput() {
+        if (Core.getKeyManager().uparrow) {
+            bricks[player.getX()][player.getY()].setDirection(true);
+            bricks[player.getX()][player.getY()].move();
+        }
+        
+        if (Core.getKeyManager().downarrow) {
+            bricks[player.getX()][player.getY()].setDirection(false);
+            bricks[player.getX()][player.getY()].move();
+        }
+        
         if (keyDelay <= 0) {
-
+            
+            //TODO nech sa 2 4 8 6 na okrajoch spravaju ako 1 3 7 9
+            
             // up left
             if (Core.getKeyManager().upleft) {
                 if (player.getX() > 0) {
@@ -56,7 +68,7 @@ public class Playground {
 
             // down left
             if (Core.getKeyManager().downleft) {
-                if (player.getX() + 1 < Core.TILE_COUNT) {
+                if (player.getX() < Core.TILE_COUNT && player.getY() < Core.TILE_COUNT - 1) {
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
@@ -64,7 +76,7 @@ public class Playground {
 
             // down right
             if (Core.getKeyManager().downright) {
-                if (player.getY() + 1 < Core.TILE_COUNT) {
+                if (player.getY() < Core.TILE_COUNT && player.getX() < Core.TILE_COUNT - 1) {
                     player.moveX(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
@@ -81,7 +93,7 @@ public class Playground {
 
             // down
             if (Core.getKeyManager().down) {
-                if (player.getX() + 1 < Core.TILE_COUNT && player.getY() + 1 < Core.TILE_COUNT) {
+                if (player.getX() < Core.TILE_COUNT - 1 && player.getY() < Core.TILE_COUNT - 1) {
                     player.moveX(1);
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
@@ -90,7 +102,7 @@ public class Playground {
 
             // left
             if (Core.getKeyManager().left) {
-                if (player.getX() > 0 && player.getY() + 1 < Core.TILE_COUNT) {
+                if (player.getX() > 0 && player.getY() < Core.TILE_COUNT - 1) {
                     player.moveX(0);
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
@@ -99,7 +111,7 @@ public class Playground {
 
             // right
             if (Core.getKeyManager().right) {
-                if (player.getY() > 0 && player.getX() + 1 < Core.TILE_COUNT) {
+                if (player.getY() > 0 && player.getX() < Core.TILE_COUNT - 1) {
                     player.moveY(0);
                     player.moveX(1);
                     keyDelay = MAX_KEY_DELAY;

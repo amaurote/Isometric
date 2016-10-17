@@ -15,7 +15,7 @@ public class Player {
         this.x = x;
         this.y = y;
     }
-
+    
     public void moveX(int dir) {
         if (dir == 1) {
             if (x < Core.TILE_COUNT) {

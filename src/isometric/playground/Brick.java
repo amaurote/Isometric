@@ -10,12 +10,8 @@ public class Brick {
 
     private float height;
     private boolean direction;
-    
-    private int type;
 
-    private float fade;
-    private final int FADE_LIMIT = 40;
-    private final int FADE_CORASE = 11;
+    private int type;
 
     public Brick(int level, int type) {
         height = level * Core.TILE_ELEV;
@@ -26,34 +22,22 @@ public class Brick {
     public Brick(int height, boolean direction) {
         this.height = height;
         this.direction = direction;
-
-        this.fade = 0;
     }
 
     public float move() {
-        if (fade > 0) {
-            fade = fade - 0.5f;
-            return height;
-        }
 
+        // up
         if (direction) {
-            height += 0.5f;
             if (height >= Core.TILE_MAX_ELEVATION) {
                 direction = false;
+            } else {
+                height += 0.5f;
             }
+            // down
+        } else if (height <= 0) {
+            direction = true;
         } else {
             height -= 0.5f;
-            if (height <= 0) {
-                direction = true;
-            }
-        }
-
-        if (height < FADE_LIMIT) {
-            fade = (FADE_LIMIT - height) / FADE_CORASE;
-        }
-
-        if (Core.TILE_MAX_ELEVATION - height < FADE_LIMIT) {
-            fade = (FADE_LIMIT - (Core.TILE_MAX_ELEVATION - height)) / FADE_CORASE;
         }
 
         return height;
@@ -61,5 +45,9 @@ public class Brick {
 
     public float getHeight() {
         return height;
+    }
+
+    public void setDirection(boolean direction) {
+        this.direction = direction;
     }
 }

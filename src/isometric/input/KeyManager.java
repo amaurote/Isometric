@@ -11,6 +11,7 @@ public class KeyManager implements KeyListener {
 
     private final boolean keys[];
     public boolean up, down, left, right, upleft, upright, downleft, downright;
+    public boolean uparrow, downarrow;
 
     public KeyManager() {
         keys = new boolean[256];
@@ -26,6 +27,9 @@ public class KeyManager implements KeyListener {
         upright = keys[KeyEvent.VK_NUMPAD9];
         downleft = keys[KeyEvent.VK_NUMPAD1];
         downright = keys[KeyEvent.VK_NUMPAD3];
+        
+        uparrow = keys[KeyEvent.VK_UP];
+        downarrow = keys[KeyEvent.VK_DOWN];
         
     }
 

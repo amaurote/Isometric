@@ -33,6 +33,10 @@ public class Draw {
     public static void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
+        // draw player status
+        g2.setColor(Color.black);
+        g2.drawString("player: " + Playground.getPlayerX() + ", " + Playground.getPlayerY(), 0, 10);
+        
         // coordinates translate: horizontal: to center; vertical: offset;
         g2.translate(Core.FRAME_WIDTH / 2, Core.VERTICAL_DRAW_OFFSET);
 
