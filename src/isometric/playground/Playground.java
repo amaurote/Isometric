@@ -39,37 +39,27 @@ public class Playground {
     private static void keyInput() {
         KeyManager keyManager = Core.getKeyManager();
 
-        if (keyManager.uparrow) {
-            bricks[player.getX()][player.getY()].setDirection(true);
-            bricks[player.getX()][player.getY()].move();
-        }
-
-        if (keyManager.downarrow) {
-            bricks[player.getX()][player.getY()].setDirection(false);
-            bricks[player.getX()][player.getY()].move();
-        }
-
         if (keyDelay <= 0) {
             if (player.getX() > 0) {
-                if (keyManager.upleft || keyManager.up || keyManager.left) {
+                if (keyManager.upleft || keyManager.up || keyManager.left || keyManager.leftarrow) {
                     player.moveX(0);
                     keyDelay = MAX_KEY_DELAY;
                 }
             }
             if (player.getY() > 0) {
-                if (keyManager.upright || keyManager.up || keyManager.right) {
+                if (keyManager.upright || keyManager.up || keyManager.right || keyManager.uparrow) {
                     player.moveY(0);
                     keyDelay = MAX_KEY_DELAY;
                 }
             }
             if (player.getX() < Core.TILE_COUNT - 1) {
-                if (keyManager.downright || keyManager.down || keyManager.right) {
+                if (keyManager.downright || keyManager.down || keyManager.right || keyManager.rightarrow) {
                     player.moveX(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
             }   
             if (player.getY() < Core.TILE_COUNT - 1) {
-                if (keyManager.downleft || keyManager.down || keyManager.left) {
+                if (keyManager.downleft || keyManager.down || keyManager.left || keyManager.downarrow) {
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
                 }

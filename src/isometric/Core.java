@@ -123,12 +123,12 @@ public class Core implements Runnable {
                 onTime();
             }
             
-            // sleep
+            /* sleep
             try {
-                Thread.sleep(0, 999);
+                Thread.sleep(0, 9);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         stop();
