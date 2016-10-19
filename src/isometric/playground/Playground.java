@@ -1,6 +1,7 @@
 package isometric.playground;
 
 import isometric.Core;
+import isometric.input.KeyManager;
 
 /**
  *
@@ -36,90 +37,43 @@ public class Playground {
     }
 
     private static void keyInput() {
-        if (Core.getKeyManager().uparrow) {
+        KeyManager keyManager = Core.getKeyManager();
+
+        if (keyManager.uparrow) {
             bricks[player.getX()][player.getY()].setDirection(true);
             bricks[player.getX()][player.getY()].move();
         }
 
-        if (Core.getKeyManager().downarrow) {
+        if (keyManager.downarrow) {
             bricks[player.getX()][player.getY()].setDirection(false);
             bricks[player.getX()][player.getY()].move();
         }
 
         if (keyDelay <= 0) {
-            // up left
-            if (Core.getKeyManager().upleft) {
-                if (player.getX() > 0) {
+            if (player.getX() > 0) {
+                if (keyManager.upleft || keyManager.up || keyManager.left) {
                     player.moveX(0);
                     keyDelay = MAX_KEY_DELAY;
                 }
             }
-            // up right
-            if (Core.getKeyManager().upright) {
-                if (player.getY() > 0) {
+            if (player.getY() > 0) {
+                if (keyManager.upright || keyManager.up || keyManager.right) {
                     player.moveY(0);
                     keyDelay = MAX_KEY_DELAY;
                 }
             }
-            // down left
-            if (Core.getKeyManager().downleft) {
-                if (player.getX() < Core.TILE_COUNT && player.getY() < Core.TILE_COUNT - 1) {
-                    player.moveY(1);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-            }
-            // down right
-            if (Core.getKeyManager().downright) {
-                if (player.getY() < Core.TILE_COUNT && player.getX() < Core.TILE_COUNT - 1) {
+            if (player.getX() < Core.TILE_COUNT - 1) {
+                if (keyManager.downright || keyManager.down || keyManager.right) {
                     player.moveX(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
-            }
-            // up
-            if (Core.getKeyManager().up) {
-                if (player.getX() > 0) {
-                    player.moveX(0);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-                if (player.getY() > 0) {
-                    player.moveY(0);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-            }
-            // down
-            if (Core.getKeyManager().down) {
-                if (player.getX() < Core.TILE_COUNT - 1) {
-                    player.moveX(1);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-                if (player.getY() < Core.TILE_COUNT - 1) {
+            }   
+            if (player.getY() < Core.TILE_COUNT - 1) {
+                if (keyManager.downleft || keyManager.down || keyManager.left) {
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
-            }
-            // left
-            if (Core.getKeyManager().left) {
-                if (player.getX() > 0) {
-                    player.moveX(0);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-                if (player.getY() < Core.TILE_COUNT - 1) {
-                    player.moveY(1);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-            }
-            // right
-            if (Core.getKeyManager().right) {
-                if (player.getX() < Core.TILE_COUNT - 1) {
-                    player.moveX(1);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-                if (player.getY() > 0) {
-                    player.moveY(0);
-                    keyDelay = MAX_KEY_DELAY;
-                }
-            }
-
+            }         
         } else {
             keyDelay--;
         }
