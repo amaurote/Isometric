@@ -36,10 +36,12 @@ public class Draw {
     }
 
     public static void draw(Graphics g) {
+        // if no change, do not draw anything
         if (Playground.isChanged() == false) {
             return;
         }
-
+        
+        // 2D graphics object
         Graphics2D g2 = (Graphics2D) g;
 
         // clear
@@ -176,7 +178,7 @@ public class Draw {
         g2.setPaint(Color.red);
         g2.draw(path);
 
-        // temp draw image
+        // temp test draw image
         int foo = (int) (tileHeight - z * tileHeight);
         g2.drawImage(temp_img, tileWidth / 2 - temp_img.getWidth(), foo - temp_img.getHeight(), null);
 
