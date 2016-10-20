@@ -11,11 +11,14 @@ public class Brick {
     private float height;
     private boolean direction;
 
+    private boolean changed;
+    
     private int type;
 
     public Brick(int level, int type) {
-        height = level * Core.TILE_ELEV;
+        this.height = level * Core.TILE_ELEV;
         this.type = type;
+        this.changed = true;
     }
 
     @Deprecated
@@ -49,5 +52,14 @@ public class Brick {
 
     public void setDirection(boolean direction) {
         this.direction = direction;
+    }
+    
+    public boolean wasChanged() {
+        if(changed) {
+            changed = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

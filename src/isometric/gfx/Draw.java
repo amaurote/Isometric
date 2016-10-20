@@ -1,11 +1,13 @@
 package isometric.gfx;
 
 import isometric.Core;
+import isometric.gfx.sprites.ImageLoader;
 import isometric.playground.Playground;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -17,9 +19,11 @@ public class Draw {
     private static int tileHeight = Core.TILE_HEIGHT;
 
     private static final boolean OUTLINE = true;
-
+    
+    private static BufferedImage temp_img;
+    
     public static void init() {
-
+        temp_img = ImageLoader.loadImage("res/tmp_spritesheet.png");
     }
 
     public static void update() {
@@ -31,12 +35,21 @@ public class Draw {
     }
 
     public static void draw(Graphics g) {
+        if (Playground.isChanged() == false) {
+            return;
+        }
+        
         Graphics2D g2 = (Graphics2D) g;
-
+        
+        // clear
+        g.clearRect(0, 0, Core.FRAME_WIDTH, Core.FRAME_HEIGHT);
+        g.setColor(Color.white);
+        g.fillRect(0, 0, Core.FRAME_WIDTH, Core.FRAME_HEIGHT);
+        
         // draw player status
         g2.setColor(Color.black);
         g2.drawString("player: " + Playground.getPlayerX() + ", " + Playground.getPlayerY(), 0, 10);
-        
+
         // coordinates translate: horizontal: to center; vertical: offset;
         g2.translate(Core.FRAME_WIDTH / 2, Core.VERTICAL_DRAW_OFFSET);
 
@@ -46,7 +59,7 @@ public class Draw {
                 drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());
             }
         }
-        
+
         // draw tile select
         int x = Playground.getPlayerX();
         int y = Playground.getPlayerY();
@@ -131,12 +144,16 @@ public class Draw {
         path.lineTo(tileWidth / 2, tileHeight / 2 - z * tileHeight);
         path.lineTo(0, tileHeight - z * tileHeight);
         path.lineTo(-tileWidth / 2, tileHeight / 2 - z * tileHeight);
-        path.closePath();
+        path.closePath();    
 
         // draw outline
         g2.setPaint(Color.red);
         g2.draw(path);
-
+        
+        // temp draw image
+        int foo = (int) (tileHeight - z * tileHeight);
+        g2.drawImage(temp_img, tileWidth / 2 - temp_img.getWidth(), foo - temp_img.getHeight(), null);
+        
         // re-set translation (VERY IMPORTANT)
         g2.translate(-xOffset, -yOffset);
     }

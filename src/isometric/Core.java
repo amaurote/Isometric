@@ -28,7 +28,7 @@ public class Core implements Runnable {
     // tiles
     public static final int TILE_WIDTH = 40;
     public static final int TILE_HEIGHT = TILE_WIDTH / 2;
-    public static final int TILE_ELEV = TILE_WIDTH * 2 + TILE_HEIGHT;
+    public static final int TILE_ELEV = (TILE_WIDTH * 2 + TILE_HEIGHT) / 2;
 
     public static final int TILE_COUNT = 20;
 
@@ -99,7 +99,7 @@ public class Core implements Runnable {
         final double ns = 1000000000.0 / 120.0; // fps
         double delta = 0;
         int frames = 0;
-        int updates = 0;
+        int updates = 0;             
 
         while (running) {
             now = System.nanoTime();
@@ -123,12 +123,12 @@ public class Core implements Runnable {
                 onTime();
             }
             
-            /* sleep
+            // sleep
             try {
-                Thread.sleep(0, 9);
+                Thread.sleep(0, 999);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
 
         stop();
@@ -144,7 +144,7 @@ public class Core implements Runnable {
     }
 
     private void onTime() {
-
+        Playground.change();
     }
 
     private void render() {
@@ -154,12 +154,7 @@ public class Core implements Runnable {
             return;
         }
 
-        g = bs.getDrawGraphics();
-
-        // clear
-        g.clearRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-        g.setColor(Color.white);
-        g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        g = bs.getDrawGraphics();   
 
         // Draw Here
         Draw.draw(g);

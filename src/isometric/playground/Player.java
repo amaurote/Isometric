@@ -25,7 +25,8 @@ public class Player {
             if (x > 0) {
                 x--;
             }
-        }
+        }       
+        Playground.change();
     }
 
     public void moveY(int dir) {
@@ -38,6 +39,7 @@ public class Player {
                 y--;
             }
         }
+        Playground.change();
     }
 
     public int getX() {
