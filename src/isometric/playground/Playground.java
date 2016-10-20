@@ -14,7 +14,7 @@ public class Playground {
 
     private static final int MAX_KEY_DELAY = 15;
     private static int keyDelay;
-    
+
     private static boolean changed;
 
     public static void init() {
@@ -22,24 +22,28 @@ public class Playground {
         player = new Player(Core.TILE_COUNT - 1, Core.TILE_COUNT - 1);
 
         keyDelay = 0;
-        
-        boolean changed = true;
-        
+
         generate();
+
+        boolean changed = true;
     }
 
     public static void update() {
         keyInput();
     }
 
+    public static void onTime() {
+        change();
+    }
+
     public static void change() {
         changed = true;
     }
-    
+
     private static void generate() {
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
-                bricks[x][y] = new Brick(2, 1);
+                bricks[x][y] = new Brick(1, 1);
             }
         }
     }
@@ -65,13 +69,13 @@ public class Playground {
                     player.moveX(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
-            }   
+            }
             if (player.getY() < Core.TILE_COUNT - 1) {
                 if (keyManager.downleft || keyManager.down || keyManager.left || keyManager.downarrow) {
                     player.moveY(1);
                     keyDelay = MAX_KEY_DELAY;
                 }
-            }         
+            }
         } else {
             keyDelay--;
         }
@@ -88,7 +92,7 @@ public class Playground {
     public static Brick getBrick(int x, int y) {
         return bricks[x][y];
     }
-    
+
     public static boolean isChanged() {
         if (changed) {
             changed = false;
@@ -96,5 +100,5 @@ public class Playground {
         } else {
             return false;
         }
-    }  
+    }
 }

@@ -11,14 +11,20 @@ public class Brick {
     private float height;
     private boolean direction;
 
-    private boolean changed;
-    
-    private int type;
+    private int groundType;
 
-    public Brick(int level, int type) {
+    private final int GT_EMPTY = 0;
+    private final int GT_DIRT  = 1;
+    private final int GT_GRASS = 2;
+    private final int GT_WATER = 9;
+
+    public Brick(int level, int groundType) {
         this.height = level * Core.TILE_ELEV;
-        this.type = type;
-        this.changed = true;
+        this.groundType = groundType;
+
+        if (this.groundType == GT_WATER) {
+            height /= 2;
+        }
     }
 
     @Deprecated
@@ -52,14 +58,5 @@ public class Brick {
 
     public void setDirection(boolean direction) {
         this.direction = direction;
-    }
-    
-    public boolean wasChanged() {
-        if(changed) {
-            changed = false;
-            return true;
-        } else {
-            return false;
-        }
     }
 }

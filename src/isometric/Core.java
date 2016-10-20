@@ -28,7 +28,7 @@ public class Core implements Runnable {
     // tiles
     public static final int TILE_WIDTH = 40;
     public static final int TILE_HEIGHT = TILE_WIDTH / 2;
-    public static final int TILE_ELEV = (TILE_WIDTH * 2 + TILE_HEIGHT) / 2;
+    public static final int TILE_ELEV = (TILE_WIDTH * 2 + TILE_HEIGHT);
 
     public static final int TILE_COUNT = 20;
 
@@ -144,7 +144,8 @@ public class Core implements Runnable {
     }
 
     private void onTime() {
-        Playground.change();
+        Playground.onTime();
+        Draw.onTime();
     }
 
     private void render() {
