@@ -2,6 +2,7 @@ package isometric.gfx;
 
 import isometric.Core;
 import isometric.gfx.sprites.ImageLoader;
+import isometric.gfx.sprites.SpriteManager;
 import isometric.playground.Playground;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,9 +20,9 @@ public class Draw {
     private static int tileHeight = Core.TILE_HEIGHT;
 
     private static final boolean OUTLINE = true;
-    
+
     private static BufferedImage temp_img;
-    
+
     public static void init() {
         temp_img = ImageLoader.loadImage("res/tmp_spritesheet.png");
     }
@@ -38,25 +39,29 @@ public class Draw {
         if (Playground.isChanged() == false) {
             return;
         }
-        
+
         Graphics2D g2 = (Graphics2D) g;
-        
+
         // clear
         g.clearRect(0, 0, Core.FRAME_WIDTH, Core.FRAME_HEIGHT);
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.fillRect(0, 0, Core.FRAME_WIDTH, Core.FRAME_HEIGHT);
-        
+
         // draw player status
-        g2.setColor(Color.black);
+        g2.setColor(Color.white);
         g2.drawString("player: " + Playground.getPlayerX() + ", " + Playground.getPlayerY(), 0, 10);
 
         // coordinates translate: horizontal: to center; vertical: offset;
         g2.translate(Core.FRAME_WIDTH / 2, Core.VERTICAL_DRAW_OFFSET);
 
-        // draw blocks
+        // draw blocks and textures
         for (int x = 0; x < Core.TILE_COUNT; x++) {
-            for (int y = 0; y < Core.TILE_COUNT; y++) {
-                drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());
+            for (int y = 0; y < Core.TILE_COUNT; y++) {             
+                // draw blocks
+                drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());          
+                // draw groundTextures
+                drawGroundTexture(g2, x, y, Playground.getBrick(x, y).getHeight(),
+                        Playground.getBrick(x, y).getGroundType());
             }
         }
 
@@ -64,6 +69,9 @@ public class Draw {
         int x = Playground.getPlayerX();
         int y = Playground.getPlayerY();
         drawTileSelect(g2, x, y, Playground.getBrick(x, y).getHeight());
+
+        // draw objects
+        // TODO
     }
 
     private static void drawBlock(Graphics2D g2, int x, int y, float z) {
@@ -127,6 +135,24 @@ public class Draw {
         g2.translate(-xOffset, -yOffset);
     }
 
+    private static void drawGroundTexture(Graphics2D g2, int x, int y, float z, int groundType) {
+        // translate
+        int xOffset = (x - y) * tileWidth / 2;
+        int yOffset = (x + y) * tileHeight / 2;
+        g2.translate(xOffset, yOffset);
+
+        // corase
+        z = z / 100.0f;
+
+        // draw texture (SpriteSheet index = 0)
+        int foo = (int) (tileHeight - z * tileHeight);
+        BufferedImage sprite = SpriteManager.getSprite(0, groundType);
+        g2.drawImage(sprite, tileWidth / 2 - sprite.getWidth(), foo - sprite.getHeight(), null);
+
+        // re-set translation (VERY IMPORTANT)
+        g2.translate(-xOffset, -yOffset);
+    }
+
     private static void drawTileSelect(Graphics2D g2, int x, int y, float z) {
         // translate
         int xOffset = (x - y) * tileWidth / 2;
@@ -144,16 +170,16 @@ public class Draw {
         path.lineTo(tileWidth / 2, tileHeight / 2 - z * tileHeight);
         path.lineTo(0, tileHeight - z * tileHeight);
         path.lineTo(-tileWidth / 2, tileHeight / 2 - z * tileHeight);
-        path.closePath();    
+        path.closePath();
 
         // draw outline
         g2.setPaint(Color.red);
         g2.draw(path);
-        
+
         // temp draw image
         int foo = (int) (tileHeight - z * tileHeight);
         g2.drawImage(temp_img, tileWidth / 2 - temp_img.getWidth(), foo - temp_img.getHeight(), null);
-        
+
         // re-set translation (VERY IMPORTANT)
         g2.translate(-xOffset, -yOffset);
     }

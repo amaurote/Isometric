@@ -43,7 +43,13 @@ public class Playground {
     private static void generate() {
         for (int x = 0; x < Core.TILE_COUNT; x++) {
             for (int y = 0; y < Core.TILE_COUNT; y++) {
-                bricks[x][y] = new Brick(1, 1);
+                if(x == 14 || x == 15) {
+                bricks[x][y] = new Brick(1, 9);
+                } else if (x == 0 || x == 1 || x == 2){
+                    bricks[x][y] = new Brick(1, 1);
+                } else {
+                    bricks[x][y] = new Brick(1, 2);
+                }
             }
         }
     }

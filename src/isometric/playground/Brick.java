@@ -55,6 +55,10 @@ public class Brick {
     public float getHeight() {
         return height;
     }
+    
+    public int getGroundType() {
+        return groundType;
+    }
 
     public void setDirection(boolean direction) {
         this.direction = direction;

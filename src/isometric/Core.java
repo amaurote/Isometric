@@ -2,6 +2,8 @@ package isometric;
 
 import isometric.display.Display;
 import isometric.gfx.Draw;
+import isometric.gfx.sprites.SpriteManager;
+import isometric.gfx.sprites.SpriteSheet;
 import isometric.input.KeyManager;
 import isometric.playground.Playground;
 import java.awt.Color;
@@ -21,7 +23,9 @@ public class Core implements Runnable {
     public final String FRAME_TITLE = "Isometric";
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 420;
-    
+
+    private final int FPS = 120;
+
     // draw
     public static final int VERTICAL_DRAW_OFFSET = 20;
 
@@ -61,13 +65,23 @@ public class Core implements Runnable {
 
         display = new Display(FRAME_TITLE, FRAME_WIDTH, FRAME_HEIGHT);
         keyManager = new KeyManager();
-
         display.getFrame().addKeyListener(keyManager);
 
         rand = new Random(seed);
 
+        init();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // INITIALIZATION
+    public void init() {
         Playground.init();
         Draw.init();
+        
+        SpriteManager.init();
+        
+        // spriteSheetIndex 0
+        SpriteManager.addSpriteSheet(new SpriteSheet("res/ss_ground.png", 10, 1, 40, 40));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -96,10 +110,10 @@ public class Core implements Runnable {
         long lastTime = System.nanoTime();
         long now;
         long timer = System.currentTimeMillis();
-        final double ns = 1000000000.0 / 120.0; // fps
+        final double ns = 1000000000.0 / FPS;
         double delta = 0;
         int frames = 0;
-        int updates = 0;             
+        int updates = 0;
 
         while (running) {
             now = System.nanoTime();
@@ -122,7 +136,7 @@ public class Core implements Runnable {
 
                 onTime();
             }
-            
+
             // sleep
             try {
                 Thread.sleep(0, 999);
@@ -138,7 +152,7 @@ public class Core implements Runnable {
     // TIME
     private void update() {
         keyManager.update();
-        
+
         Playground.update();
         Draw.update();
     }
@@ -155,7 +169,7 @@ public class Core implements Runnable {
             return;
         }
 
-        g = bs.getDrawGraphics();   
+        g = bs.getDrawGraphics();
 
         // Draw Here
         Draw.draw(g);
