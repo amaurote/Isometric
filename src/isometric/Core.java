@@ -6,7 +6,6 @@ import isometric.gfx.sprites.SpriteManager;
 import isometric.gfx.sprites.SpriteSheet;
 import isometric.input.KeyManager;
 import isometric.playground.Playground;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
@@ -74,7 +73,7 @@ public class Core implements Runnable {
 
     ////////////////////////////////////////////////////////////////////////////
     // INITIALIZATION
-    public void init() {
+    public final void init() {
         Playground.init();
         Draw.init();
         
@@ -136,10 +135,10 @@ public class Core implements Runnable {
 
                 onTime();
             }
-
+            
             // sleep
             try {
-                Thread.sleep(0, 999);
+                Thread.sleep(0, 9999);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

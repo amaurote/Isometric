@@ -40,7 +40,7 @@ public class Draw {
         if (Playground.isChanged() == false) {
             return;
         }
-        
+
         // 2D graphics object
         Graphics2D g2 = (Graphics2D) g;
 
@@ -58,9 +58,9 @@ public class Draw {
 
         // draw blocks and textures
         for (int x = 0; x < Core.TILE_COUNT; x++) {
-            for (int y = 0; y < Core.TILE_COUNT; y++) {             
+            for (int y = 0; y < Core.TILE_COUNT; y++) {
                 // draw blocks
-                drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());          
+                drawBlock(g2, x, y, Playground.getBrick(x, y).getHeight());
                 // draw groundTextures
                 drawGroundTexture(g2, x, y, Playground.getBrick(x, y).getHeight(),
                         Playground.getBrick(x, y).getGroundType());
