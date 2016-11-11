@@ -172,6 +172,7 @@ public class Core implements Runnable {
 
         // Draw Here
         Draw.draw(g);
+        
         // end drawing
         bs.show();
         g.dispose();
